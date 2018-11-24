@@ -5,6 +5,8 @@
 
 \usepackage[margin=1.4in]{geometry}
 \usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{xcolor}
 \usepackage{float}
 \usepackage{amsmath}
 
@@ -37,15 +39,124 @@ View maintenance is the process of updating a materialized
 view in response to changes to the underlying data is called view 
 maintenance. There are several algorithms developed by different 
 authors to ease the problem of view maintenance for data warehouse 
-systems. \\
-In this report, we document the already existing approaches in the field, describe the approach that we took and also show our findings and conclusions.
+systems. \cite{basic} \\
+In this report, we document the already existing approaches in the field, describe the approach that we took and also show our findings and conclusions. 
+\\\\First, some definitions-
 
-\section{Related Work}
-The plant is a system, and a system needs harmonical contributions of some components. These components in their actual form are discussed below one by one. The work-flow of a thermal power plant is in the following manner. Fuel (which has generally large particle size) is crushed down to smaller particle size. It is then combusted to generate heat. This heat is then transferred to running water which then turns to high pressure steam. Generally, gases from the boiler exhaust are at high temperature and if this heat is not utilized will lead to a large amount of losses resulting in reduced boiler efficiency. So generally this waste heat is recovered by heating either air required for combustion or preheat water before sending it into a boiler. Gases are then allowed to pass through a dust collector or a bag filter to arrest dust particles so as to prevent air pollution before sending it to the atmosphere through a chimney.
+\begin{description}[font=$\bullet$~\normalfont\scshape\color{orange!50!black}]
+\item [Source] - A  database,  application,  file,  or  other  storage  facility  from which  the  data  in  a  data  warehouse  is  derived.  The  source contains  the  operating  data,  flat  files  and  stage  files.  The  
+stage  file  receives  the  data  from  source  process  and  it  
+verifies  its  credit-ability  and  the  required  data  files  will  be  
+passed   to   warehouse   through   view   manager.   Source   
+division also termed as top tier of architecture. \cite{saudi}
+\item[Warehouse] - A relational database that is designed for query and analysis rather   than   transaction   processing.   A   data   warehouse
+usually   contains   historical   data   that   is   derived   from transaction data, but it can include data from other sources. It  separates  analysis  workload  from  transaction  workload  and  enables  a  business  to  consolidate  data  from  several
+sources.  It  contains  the  Summary  data,  raw  data,  metadata,
+mined  data  etc.  Warehouse  division  also  termed  as  middle
+tier of architecture. \cite{saudi}
+\item[User] - Users   may   be   end   users   and   make   use   of   the   data warehouse   view   maintenance   in   the   Analysis   of   Data   
+mining, Data reporting etc, and User division also termed as 
+top tier of the architecture. \cite{saudi}
+\end{description}
+
+\section{Existing and Related Work}
+Various  approaches  have  been  introduced  for  maintaining  
+the view in a warehouse environment. 
 \begin{figure}[H]
-\centering \includegraphics[width=0.9\textwidth]{images/pic1.jpg}
-\caption{Image}
+\centering \includegraphics[width=0.7\textwidth]{images/pic1.png}
+\caption{Basic Approach}
 \end{figure}
+\begin{description}[font=$\bullet$~\normalfont\scshape\color{blue!50!black}]
+\item[Basic Algorithm] In Fig 1, it is shown that there 
+is communication between Source and  the  warehouse,  when  update  occurs  at  source,  it  sends the  notification  to  warehouse  later  on  warehouse  sends  the query  to  source  for  the  corresponding  update  as  source  
+receives the query it sends the answer to warehouse to that corresponding query.\\
+\\1. When  an  update  occurs at  the  source,  it  sends  the update notification to the warehouse. 
+\\2. Warehouse  receives  the  notification  and  sends  
+back the query to the source about the update. 
+\\3. Source receives the query    sent    by    the    
+warehouse and returns the answer to that query.  
+\\\\The   basic   algorithm   is   neither   convergent   nor   weakly   
+consistent in warehouse environment. \cite{saudi}
+\item[Recompute View] RV does not rely on incremental view maintenance 
+approach. It is based on recomputation of materialized view 
+from the scratch. When ever the update occurs at the source 
+it recomputes the view from the scratch. In RV approach 
+warehouse sends the Query to the source asking it to 
+recompute the view from the scratch after certain number of 
+updates. RV sends 2 messages for each update. The bytes 
+transferred are much higher
+ in RV than the relative 
+algorithms. \\This degrades the performance of RV \cite{saudi}
+\\\item[Eager Compensating Algorithm]
+COLLECT =  
+\\W $up_i$
+: receive $U_i$; 
+\begin{center}
+Let $Q_i$
+= v($U_i$) – 
+$_{Q}\in_{UQS}Q_j(U_i) $
+\\send $Q_i$ to the source; 
+\\trigger event S $qu_i$ at the source 
+\end{center}
+W $ans_i$: receive $A_i$; 
+\begin{center}
+        let COLLECT = COLLECT + $A_i$; 
+\\        if UQS =
+           \\then { MV ←MV + COLLECT; COLLECT ←} 
+\\        else do nothing. 
+\end{center}
+ECA is an incremental view maintenance algorithm. It is a 
+method   for   fixing   the   view   maintenance   problem   that   
+occurs  due  to  the  decoupling  between  base  data  and  the  
+view maintenance manager at the warehouse. The key idea 
+of  the  ECA  algorithm  is  that  it  cannot  rely  on  the  state  of  
+the     base     information     that     is     continuously     being     
+updated/modified  by  the  sources.  It  must  keep  track  of  the  
+updates  received  from  the  source  and  then  filter  out  i.e.,  
+compensate any information that will duplicate the resulting 
+queries. By subtracting (or adding) the results it knows that 
+will (not) get in future queries, it will create an accurate end 
+result for the view.
+\\The above algorithm states that: 
+Initially  the  COLLECT  will  be  empty,  source  executes  an  
+update  ($U_i$)  and  the  notification  sent  to  the  warehouse.  
+Warehouse  receives  the  source  update ($U_i$)  and  sends  the  
+query ($Q_i$)     based on  ($U_i$), for each query in     
+UQS(Unanswered Query Set: the set of query set that were 
+sent by the warehouse, but answers have not been received)
+formulates  a  compensating  Query $Q_j$ based on $U_i$ and $Q_i$ with $Q_j$. Warehouse receive the query result and update the 
+Materialized  View(MV),  the  result  of  the  query  should  be  
+applied to the Materialized Vi
+ew(MV) only after the answer 
+to this query and all related compensating query have been 
+received. 
+To   avoid   invalid   state   ECA   collects   the   intermediate   
+answers  in  relation  denote
+d  as  COLLECT  (initially  its  
+empty).\cite{saudi}
+\item[Lazy Approach] Lazy approach maintains the view in a lazy manner that 
+relieves the updates of the maintenance overhead as in the 
+incremental view maintenance approaches. View 
+maintenance is postponed unt
+il the system has free cycles 
+or it is referenced by any query. These free cycles are utilized for the view maintenance that relieves the updates 
+and queries from the overhead
+. The updates are combined 
+from different transactions into a single maintenance task. It 
+also exploits row versioning. In lazy maintenance the 
+updates do not maintain the view it just stores the required 
+information so that the affect
+ed views can be maintained 
+later. It actually uses system free cycles to maintain the 
+views, in this no updates or queries pay for the maintenance 
+task. But, in case the view is not
+ up to date and query is sent 
+over it, then the particular query has to pay for all part of 
+the view maintenance and some
+delay also. However, it 
+pays only the view maintenance that it uses and not for 
+other views \cite{basic}
+\end{description}
 \section{Proposed Approach}
 Fuel is an important resource. Any plant which depends extensively on fuel needs to store it somewhere from where it could be used later on when the supply of fuel from the mine is improper. This is where a fuel storage facility comes into picture. \par In a thermal power plant, the first step in process of power generation is that the fuel is brought to breaker house with the help of belt conveyor, here light dust is separated with the help of rotary machine through the action of gravity. It further goes to the crusher where it is crushed to a size of about 50mm.
 \section{Implementation and Results}
@@ -66,11 +177,12 @@ The flue gases leaving the boiler also contain some ash particles, so to reduce 
 The flue gases are drawn through this equipment using an Induced Draft (ID) Fan which is designed for a fixed capacity and head to prevent any back pressure. After the ID fan, flue gases are exhausted off into the atmosphere using a chimney.
 \\ 
 \begin{thebibliography}{999}
-\bibitem{lambport}
-https://www.youtube.com/watch?v=8uwrMLrqQlU
-\bibitem{lambport}
-http://www.thermodyneboilers.com/components-working-thermal-power-plant/
-\bibitem{lambport}
-https://en.wikipedia.org/wiki/File:PowerStation2.svg
+\bibitem{saudi}
+Abdulaziz S. Almazyad and Mohammad Khubeb Siddiqui\emph{ Incremental View Maintenance: An Algorithmic 
+Approach}.
+ 	 Feb, 2016.
+\bibitem{basic}
+Hemant Jain Anjana Gosain \emph{A Comprehensive Study of View Maintenance Approaches in Data Warehousing Evolution }.
+ 	 Sept, 2012. 	 
 \end{thebibliography}
 \end{document}

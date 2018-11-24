@@ -1,5 +1,5 @@
 \contentsline {section}{\numberline {1}Introduction}{3}
-\contentsline {section}{\numberline {2}Related Work}{3}
-\contentsline {section}{\numberline {3}Proposed Approach}{4}
-\contentsline {section}{\numberline {4}Implementation and Results}{5}
-\contentsline {section}{\numberline {5}Conclusions and Limitations}{5}
+\contentsline {section}{\numberline {2}Existing and Related Work}{4}
+\contentsline {section}{\numberline {3}Proposed Approach}{6}
+\contentsline {section}{\numberline {4}Implementation and Results}{6}
+\contentsline {section}{\numberline {5}Conclusions and Limitations}{7}
