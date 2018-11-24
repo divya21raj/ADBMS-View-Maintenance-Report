@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.11.17)  22 NOV 2018 15:16
+This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.11.17)  24 NOV 2018 15:15
  restricted system commands enabled.
 **ADBMS.tex
 (./ADBMS.tex
@@ -34,14 +34,14 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.224 seconds
+luaotfload | main : initialization completed in 0.126 seconds
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 luaotfload | db : Font names database loaded from /home/D2R/.texlive2018/texmf-v
 ar/luatex-cache/generic/names/luaotfload-names.luc(load luc: /home/D2R/.texlive2
-018/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc))
+018/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.luc))
 \c@part=\count80
 \c@chapter=\count81
 \c@section=\count82
@@ -214,12 +214,12 @@ LaTeX Font Info:    ... okay on input line 11.
 * \topmargin=-8.09244pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=10.0pt
+* \topskip=12.0pt
 * \footskip=30.0pt
-* \marginparwidth=65.0pt
-* \marginparsep=11.0pt
+* \marginparwidth=44.0pt
+* \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -290,29 +290,59 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 
 ))(load luc: /home/D2R/.texlive2018/texmf-var/luatex-cache/generic/fonts/otl/lmr
 oman17-regular.luc)(load luc: /home/D2R/.texlive2018/texmf-var/luatex-cache/gene
-ric/fonts/otl/lmroman12-bold.luc)(load luc: /home/D2R/.texlive2018/texmf-var/lua
-tex-cache/generic/fonts/otl/lmroman12-regular.luc) [1
+ric/fonts/otl/lmroman12-bold.luc) [1
 
-{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}] (./ADBMS.to
-c)
-\tf@toc=\write3
-
-\openout3 = ADBMS.toc
- [1
-
-]
-<images/pic1.jpg, id=14, 2545.51pt x 2392.94pt>
-File: images/pic1.jpg Graphic file (type jpg)
-<use images/pic1.jpg>
-Package luatex.def Info: images/pic1.jpg  used on input line 19.
-(luatex.def)             Requested size: 370.74338pt x 348.51923pt.
- [2<./images/pic1.jpg>](load luc: /home/D2R/.texlive2018/texmf-var/luatex-cache/
-generic/fonts/otl/lmroman10-italic.luc) [3]
-Underfull \hbox (badness 10000) in paragraph at lines 42--44
+{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 14--21
 
  []
 
-[4] [5
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--21
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--21
+
+ []
+
+
+Overfull \hbox (11.27582pt too wide) in paragraph at lines 14--21
+\TU/lmr/m/n/12 Finally, we would like to thank Github user An-to-nioL for his r
+epos-i-tory - ”factorized-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--21
+
+ []
+
+[1] (./ADBMS.toc)
+\tf@toc=\write3
+
+\openout3 = ADBMS.toc
+ [2
+
+]
+<images/pic1.jpg, id=15, 2545.51pt x 2392.94pt>
+File: images/pic1.jpg Graphic file (type jpg)
+<use images/pic1.jpg>
+Package luatex.def Info: images/pic1.jpg  used on input line 46.
+(luatex.def)             Requested size: 370.74338pt x 348.51923pt.
+ [3] [4<./images/pic1.jpg>](load luc: /home/D2R/.texlive2018/texmf-var/luatex-ca
+che/generic/fonts/otl/lmroman12-italic.luc) [5]
+Underfull \hbox (badness 10000) in paragraph at lines 66--68
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
+[]\TU/lmr/m/n/12 http://www.ther-mo-dyneboil-ers.com/components-working-thermal
+-power-
+ []
+
+[7
 
 ] (./ADBMS.aux)
 
@@ -321,25 +351,23 @@ LaTeX Warning: There were multiply-defined labels.
 )
 
 Here is how much of LuaTeX's memory you used:
- 2803 strings out of 494412
+ 2804 strings out of 494412
  100000,128383 words of node,token memory allocated
  432 words of node memory still in use:
    5 hlist, 2 vlist, 2 rule, 2 glue, 1 kern, 5 attribute, 49 glue_spec, 5 attrib
 ute_list, 1 write nodes
-   avail lists: 2:149,3:41,4:34,5:219,6:12,7:4233,8:5,9:69,10:19,11:285
- 6816 multiletter control sequences out of 65536+600000
- 48 fonts using 3399415 bytes
+   avail lists: 2:91,3:26,4:11,5:169,6:8,7:3155,8:5,9:49,10:8,11:229
+ 6818 multiletter control sequences out of 65536+600000
+ 47 fonts using 3267671 bytes
  41i,6n,32p,947b,229s stack positions out of 5000i,500n,10000p,200000b,100000s
-</usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf></u
-sr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr
-/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr/s
-hare/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on ADBMS.pdf (6 pages, 1396611 bytes).
+</usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-italic.otf></u
+sr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr
+/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on ADBMS.pdf (8 pages, 1388628 bytes).
 
-PDF statistics: 60 PDF objects out of 1000 (max. 8388607)
- 36 compressed objects within 1 object stream
+PDF statistics: 55 PDF objects out of 1000 (max. 8388607)
+ 33 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 
