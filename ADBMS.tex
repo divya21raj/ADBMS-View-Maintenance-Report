@@ -168,8 +168,8 @@ We made an approach which is a hybrid of the incremental and the recompute view 
   \item Upon inputting the query, the query is first parsed to get the corresponding views, base tables and the operations to be performed.
   \item Meanwhile, a query is made to get the mapping between the source's and the warehouse's column. For example, in the case of P and V, to figure out that V.A = P.a
   \item If the query on the base table is simple (i.e does not contain joins, only selection and projections) go to 6, else go to 5.
-  \item Simple query - Send a command to the view to recompute itself, i.e delete the previous existence, and recalculate the base table query that forms it. Save it to 	              disk. End.
-  \item Complex query - Send a query to the view which updates the view instead of recalculating it. This happens by the insert, update and delete triggers that were 			         defined earlier on the base table.\\
+  \item Simple query - \textbf{Incremental approach}, i.e send a command to the view to recompute itself, i.e delete the previous existence, and recalculate the base table query that forms it. Save it to disk. End.
+  \item Complex query - \textbf{Recompute View}, i.e send a query to the view which updates the view instead of recalculating it. This happens by the insert, update and delete triggers that were defined earlier on the base table. End.\\
 \end{enumerate}
 \begin{figure}[H]
 \centering \includegraphics[width=0.8\textwidth]{images/flowchart.png}
@@ -202,19 +202,15 @@ To implement our algorithm, we worked with Google Big Query, which is Google's s
 	\item Based on if the query has more than one tables mentioned after 'from' in the statement. it's classified as simple(1 table) or complex(>1 table). If a query is 					simple go to step 7 else execute step 8 and then go to step 9.
 	\item Query is simple, hence the corresponding trigger executes and the value is either inserted, updated or deleted in the view, changes are saved to disk.
 	\item Query is complex, hence the existing view is deleted and a new view is recalculated. This new view is then saved.
+	\item End.
 \end{enumerate}
+\pagebreak
 \section{Limitations and Conclusions}
-A boiler is a high pressure vessel used to generate high pressure steam at saturated temperatures. Water tube boiler consists of a furnace enclosed by the water tubes membrane. The crushed fuel from the crushers is fed into the boiler furnace over the grate. The hot air from the Forced Draft (FD) fan is mixed with the crushed fuel causing combustion of fuel.
-Combustion of fuel generates a lot of radiation heat which is transferred to water in the membrane tubes. Flue gases generated during combustion travel at high velocity across the convection bank of tubes thereby heating water through convection heat transfer. Hot water is sent to a boiler drum at high pressure through the feed water pump. The boiler tubes which are in contact with low temperature acts as downcomers to circulate the water while the tubes which are in contact with high temperature acts as risers to carry steam. This leads to an effective circulation of water thereby preventing the tubes from getting overheated.
-
-Steam leaving the boiler is at a saturated temperature and pressure but there are a lot of heat losses during its transportation to the turbines. So to increase the quality of steam, steam Superheater is installed in a radiative section of a boiler to increase its temperature and dryness fraction without increasing its pressure as well as to accommodate for the transportation temperature losses.
-
-The exhaust gases leaving the boiler are generally at high temperature and this waste heat is extracted by installing an Economiser or Water Pre heaters to preheat the feed water to the boiler and Air Preheaters to pre-heat the air coming from the Forced Draft Fan required for the combustion of fuel. Installing this equipment help to decrease the flue gas temperature thereby increasing the efficiency.
-
-The flue gases leaving the boiler also contain some ash particles, so to reduce the air pollution, flue gases are allowed to pass through the Dust Collectors and Bag Filters to remove the ash particulates from the flue gases and are sometimes passed through the Wet Scrubbers to decrease the sulfur content from the gases.
-
-The flue gases are drawn through this equipment using an Induced Draft (ID) Fan which is designed for a fixed capacity and head to prevent any back pressure. After the ID fan, flue gases are exhausted off into the atmosphere using a chimney.
-\\ 
+The approach that we've taken is really basic and has a few limitations.
+\\The obvious one is the recomputation of the view the query made is complex i.e contains joins etc. That is one thing we would want to improve in the future. This can be done by having a logging system between the view and the base table, which can be used to calculate the diffs instead of the entire view again.
+Another limitation is that our solution is not as scalable as some of the existing approaches (notably ECA). It runs smoothly on our StackOverflow dataset, but will mostly struggle in terms of performance when used on bigger and more varied datasets.
+\\\\In conclusion, we would like to say that even though we were not able to implement some of the advanced view maintenance algorithms, this project gave us an opportunity to study about these algorithms thoroughly, and develop a theoretical understanding about them.
+\\The actual implementation that we did, gave us good insight into how materialized views are maintained practically. This gave us an opportunity to extend what we had learned in the class and build something practical that could reinforce our learning of the concept.
 \begin{thebibliography}{999}
 \bibitem{saudi}
 Abdulaziz S. Almazyad and Mohammad Khubeb Siddiqui\emph{ Incremental View Maintenance: An Algorithmic 
@@ -225,5 +221,7 @@ Hemant Jain Anjana Gosain \emph{A Comprehensive Study of View Maintenance Approa
  	 Sept, 2012. 	 
 \bibitem{gcp}
 Google Big Query Documentation \emph{https://console.cloud.google.com/bigquery/docs}.
+\bibitem{git}
+AntonioL \emph{github.com/AntonioL/factorized-incremental-maintenance}
 \end{thebibliography}
 \end{document}
