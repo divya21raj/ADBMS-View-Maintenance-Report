@@ -168,8 +168,8 @@ We made an approach which is a hybrid of the incremental and the recompute view 
   \item Upon inputting the query, the query is first parsed to get the corresponding views, base tables and the operations to be performed.
   \item Meanwhile, a query is made to get the mapping between the source's and the warehouse's column. For example, in the case of P and V, to figure out that V.A = P.a
   \item If the query on the base table is simple (i.e does not contain joins, only selection and projections) go to 6, else go to 5.
-  \item Simple query - \textbf{Incremental approach}, i.e send a command to the view to recompute itself, i.e delete the previous existence, and recalculate the base table query that forms it. Save it to disk. End.
-  \item Complex query - \textbf{Recompute View}, i.e send a query to the view which updates the view instead of recalculating it. This happens by the insert, update and delete triggers that were defined earlier on the base table. End.\\
+  \item Complex query - \textbf{Recompute View}, i.e send a command to the view to recompute itself, i.e delete the previous existence, and recalculate the base table query that forms it. Save it to disk. End.
+  \item Simple query - \textbf{Incremental approach}, i.e send a query to the view which updates the view instead of recalculating it. This happens by the insert, update and delete triggers that were defined earlier on the base table. End.\\
 \end{enumerate}
 \begin{figure}[H]
 \centering \includegraphics[width=0.8\textwidth]{images/flowchart.png}
@@ -207,9 +207,9 @@ To implement our algorithm, we worked with Google Big Query, which is Google's s
 \pagebreak
 \section{Limitations and Conclusions}
 The approach that we've taken is really basic and has a few limitations.
-\\The obvious one is the recomputation of the view the query made is complex i.e contains joins etc. That is one thing we would want to improve in the future. This can be done by having a logging system between the view and the base table, which can be used to calculate the diffs instead of the entire view again.
-Another limitation is that our solution is not as scalable as some of the existing approaches (notably ECA). It runs smoothly on our StackOverflow dataset, but will mostly struggle in terms of performance when used on bigger and more varied datasets.
-\\\\In conclusion, we would like to say that even though we were not able to implement some of the advanced view maintenance algorithms, this project gave us an opportunity to study about these algorithms thoroughly, and develop a theoretical understanding about them.
+\\\\The obvious one is the recomputation of the view the query made is complex i.e contains joins etc. That is one thing we would want to improve in the future. This can be done by having a logging system between the view and the base table, which can be used to calculate the diffs instead of the entire view again.
+\\\\ Another limitation is that our solution is not as scalable as some of the existing approaches (notably ECA). It runs smoothly on our StackOverflow dataset, but will mostly struggle in terms of performance when used on bigger and more varied datasets.
+\\\\\\In conclusion, we would like to say that even though we were not able to implement some of the advanced view maintenance algorithms, this project gave us an opportunity to study about these algorithms thoroughly, and develop a theoretical understanding about them.
 \\The actual implementation that we did, gave us good insight into how materialized views are maintained practically. This gave us an opportunity to extend what we had learned in the class and build something practical that could reinforce our learning of the concept.
 \begin{thebibliography}{999}
 \bibitem{saudi}
