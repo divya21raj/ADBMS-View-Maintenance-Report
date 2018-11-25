@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.11.17)  24 NOV 2018 18:23
+This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.11.17)  26 NOV 2018 00:38
  restricted system commands enabled.
 **ADBMS.tex
 (./ADBMS.tex
@@ -34,7 +34,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.124 seconds
+luaotfload | main : initialization completed in 0.126 seconds
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -369,26 +369,63 @@ Underfull \hbox (badness 10000) in paragraph at lines 80--90
 
  []
 
-[4<./images/pic1.png>] [5](load luc: /home/D2R/.texlive2018/texmf-var/luatex-cac
-he/generic/fonts/otl/lmroman12-italic.luc) [6]
-Underfull \hbox (badness 10000) in paragraph at lines 177--179
+[4<./images/pic1.png>] [5]
+<images/mapping.png, id=30, 295.1025pt x 223.83624pt>
+File: images/mapping.png Graphic file (type png)
+<use images/mapping.png>
+Package luatex.def Info: images/mapping.png  used on input line 163.
+(luatex.def)             Requested size: 164.77344pt x 124.98198pt.
+ [6<./images/mapping.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 172--173
 
  []
 
-[7] [8
+<images/flowchart.png, id=35, 523.9575pt x 616.3025pt>
+File: images/flowchart.png Graphic file (type png)
+<use images/flowchart.png>
+Package luatex.def Info: images/flowchart.png  used on input line 175.
+(luatex.def)             Requested size: 329.55316pt x 387.64256pt.
+<images/so.png, id=36, 66.4884pt x 66.4884pt>
+File: images/so.png Graphic file (type png)
+<use images/so.png>
+Package luatex.def Info: images/so.png  used on input line 184.
+(luatex.def)             Requested size: 164.77344pt x 164.78299pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 180--186
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 180--186
+
+ []
+
+[7<./images/flowchart.png>] [8<./images/so.png>]
+<images/mvq.png, id=45, 260.6538pt x 32.2806pt>
+File: images/mvq.png Graphic file (type png)
+<use images/mvq.png>
+Package luatex.def Info: images/mvq.png  used on input line 198.
+(luatex.def)             Requested size: 411.9399pt x 51.02196pt.
+ [9<./images/mvq.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 216--218
+
+ []
+
+[10](load luc: /home/D2R/.texlive2018/texmf-var/luatex-cache/generic/fonts/otl/l
+mroman12-italic.luc) [11
 
 ] (./ADBMS.aux))
 
 Here is how much of LuaTeX's memory you used:
- 3571 strings out of 494412
+ 3616 strings out of 494412
  100000,154059 words of node,token memory allocated
  432 words of node memory still in use:
    5 hlist, 2 vlist, 2 rule, 2 glue, 1 kern, 5 attribute, 49 glue_spec, 5 attrib
 ute_list, 1 write nodes
-   avail lists: 2:147,3:52,4:32,5:165,6:11,7:3087,8:10,9:87,10:16,11:203
- 7562 multiletter control sequences out of 65536+600000
- 49 fonts using 3529975 bytes
- 41i,7n,36p,725b,268s stack positions out of 5000i,500n,10000p,200000b,100000s
+   avail lists: 2:162,3:52,4:30,5:168,6:11,7:3086,8:10,9:87,10:16,11:203
+ 7582 multiletter control sequences out of 65536+600000
+ 50 fonts using 3661655 bytes
+ 41i,7n,36p,645b,365s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-italic.otf></u
 sr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmromancaps10-regular.otf><
 /usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></u
@@ -397,10 +434,10 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on ADBMS.pdf (9 pages, 88517 bytes).
+Output written on ADBMS.pdf (12 pages, 166491 bytes).
 
-PDF statistics: 78 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+PDF statistics: 97 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 

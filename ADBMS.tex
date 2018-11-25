@@ -1,5 +1,5 @@
 \documentclass[12pt]{report}
-\title{\textbf{\Huge View Maintenance \\ in Data Warehousing } }
+\title{\textbf{\Huge View Maintenance \\ \large{in} \\ \Huge Data Warehousing } }
 \author{CV Hariharan \bullet 1610110147 \\ Divya Raj \bullet 1610110123 \\ Devansh Purohit \bullet 1610110116}
 \date{}
 
@@ -126,8 +126,7 @@ UQS(Unanswered Query Set: the set of query set that were
 sent by the warehouse, but answers have not been received)
 formulates  a  compensating  Query $Q_j$ based on $U_i$ and $Q_i$ with $Q_j$. Warehouse receive the query result and update the 
 Materialized  View(MV),  the  result  of  the  query  should  be  
-applied to the Materialized Vi
-ew(MV) only after the answer 
+applied to the Materialized View(MV) only after the answer 
 to this query and all related compensating query have been 
 received. 
 To   avoid   invalid   state   ECA   collects   the   intermediate   
@@ -157,14 +156,54 @@ delay also. However, it
 pays only the view maintenance that it uses and not for 
 other views \cite{basic}
 \end{description}
+
 \section{Proposed Approach}
-Fuel is an important resource. Any plant which depends extensively on fuel needs to store it somewhere from where it could be used later on when the supply of fuel from the mine is improper. This is where a fuel storage facility comes into picture. \par In a thermal power plant, the first step in process of power generation is that the fuel is brought to breaker house with the help of belt conveyor, here light dust is separated with the help of rotary machine through the action of gravity. It further goes to the crusher where it is crushed to a size of about 50mm.
+We made an approach which is a hybrid of the incremental and the recompute view approach. \\Consider a base relation P(a, b, c) with a materialized view V(A, B), where V.A maps to P.a and V.B maps to P.b .
+\begin{figure}[H]
+\centering \includegraphics[width=0.4\textwidth]{images/mapping.png}
+\caption{Mapping between base table and the view}
+\end{figure}
+\begin{enumerate}
+  \item When the view V is made, 3 triggers are made on P, for insert, update and delete, which will be used later to update the views.
+  \item Upon inputting the query, the query is first parsed to get the corresponding views, base tables and the operations to be performed.
+  \item Meanwhile, a query is made to get the mapping between the source's and the warehouse's column. For example, in the case of P and V, to figure out that V.A = P.a
+  \item If the query on the base table is simple (i.e does not contain joins, only selection and projections) go to 6, else go to 5.
+  \item Simple query - Send a command to the view to recompute itself, i.e delete the previous existence, and recalculate the base table query that forms it. Save it to 	              disk. End.
+  \item Complex query - Send a query to the view which updates the view instead of recalculating it. This happens by the insert, update and delete triggers that were 			         defined earlier on the base table.\\
+\end{enumerate}
+\begin{figure}[H]
+\centering \includegraphics[width=0.8\textwidth]{images/flowchart.png}
+\caption{Basic flowchart of the implementation}
+\end{figure}
+
 \section{Implementation and Results}
-The water that has been converted to steam, is brought to the turbines under high pressure. This steam is used to rotate them. Normal water is taken from the river, and it contains a lot of dirt, suspended particulate matter (SPM), dissolved minerals and dissolved gases such as air etc. If the water fed to the boiler is not treated, it will reduce the life and efficiency of equipment by corroding the surfaces which may lead to overheating of pressure parts and explosions. \par This particulate matter is separated out by adding {\it alum} into the water. Alum coagulates the dirt and increases its density. Then, due to gravity, this coagulated matter settles down in the water which is then removed from it. 
-
-
-\par After gravity separation, water softening is done by ion exchange process. As the hardness comes through the carbonates and bicarbonates of sodium and magnesium, these salts are removed from water anion exchange and cation exchange process. \par Water also contains dissolved oxygen and this leads to corrosion and fouling of boiler tubes and surfaces when it comes in their contact. So removing dissolved oxygen from water is done by adding oxygen scavengers and by using a Deaerator tank. Deaerator tank also acts as a feed water tank to store the feed water. On heating feed water in a deaerator tank decreases the solubility of air in water, thereby removing the dissolved air from the water.
-\section{Conclusions and Limitations}
+To implement our algorithm, we worked with Google Big Query, which is Google's serverless, highly scalable, enterprise data warehouse designed to make our data analysis on a warehouse without worrying about the logistics of it all. \cite{gcp} 
+\\\\ We wrote our code in the python programming language and used the 'bigquery', 'sqlparse' and 'mysql' libraries to assist us.
+\\\\We used the openly available StackOverflow dataset as our dummy data warehouse. The dataset is of size 57 GB and has 4 tables and 3 view, as shown in Figure 4.
+\begin{figure}[H]
+\centering \includegraphics[width=0.4\textwidth]{images/so.png}
+\caption{Tables and View in the Dataset (Blue = table, Green = view)}
+\end{figure}
+\begin{enumerate}
+	\item Connect to the GCP client using the API key provided, so that we can work with the StackOverflow Dataset.
+	\item Input a query. Parse it to find out the view, base table(s) and the SQL command involved.
+	\item If a new view is to be formed from a base table, say 'important\_answers\_table', set up triggers for the base table- 
+		\begin{enumerate}
+			\item Insert- Set up an insert trigger which sends an appropriate query to the view when an insertion of a new answer takes place on the base table.
+			\item Update- An update trigger which sends an update query to the view when values are updated in the base table.
+			\item Delete- A delete trigger which deletes the corresponding answer from the view as it was deleted in the base table.
+		\end{enumerate}
+	\item Figure out the mappings from view to base table. An example result output of step 3 and 4 is shown in Figure 5.
+		\begin{figure}[H]
+		\centering \includegraphics[width=1\textwidth]{images/mvq.png}
+		\caption{View mapping and trigger formation output}
+		\end{figure}
+	\item Execute the query on the base table, save the result.
+	\item Based on if the query has more than one tables mentioned after 'from' in the statement. it's classified as simple(1 table) or complex(>1 table). If a query is 					simple go to step 7 else execute step 8 and then go to step 9.
+	\item Query is simple, hence the corresponding trigger executes and the value is either inserted, updated or deleted in the view, changes are saved to disk.
+	\item Query is complex, hence the existing view is deleted and a new view is recalculated. This new view is then saved.
+\end{enumerate}
+\section{Limitations and Conclusions}
 A boiler is a high pressure vessel used to generate high pressure steam at saturated temperatures. Water tube boiler consists of a furnace enclosed by the water tubes membrane. The crushed fuel from the crushers is fed into the boiler furnace over the grate. The hot air from the Forced Draft (FD) fan is mixed with the crushed fuel causing combustion of fuel.
 Combustion of fuel generates a lot of radiation heat which is transferred to water in the membrane tubes. Flue gases generated during combustion travel at high velocity across the convection bank of tubes thereby heating water through convection heat transfer. Hot water is sent to a boiler drum at high pressure through the feed water pump. The boiler tubes which are in contact with low temperature acts as downcomers to circulate the water while the tubes which are in contact with high temperature acts as risers to carry steam. This leads to an effective circulation of water thereby preventing the tubes from getting overheated.
 
@@ -184,5 +223,7 @@ Approach}.
 \bibitem{basic}
 Hemant Jain Anjana Gosain \emph{A Comprehensive Study of View Maintenance Approaches in Data Warehousing Evolution }.
  	 Sept, 2012. 	 
+\bibitem{gcp}
+Google Big Query Documentation \emph{https://console.cloud.google.com/bigquery/docs}.
 \end{thebibliography}
 \end{document}
